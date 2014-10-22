@@ -9,7 +9,7 @@ var file = fs.readFileSync(process.argv[2], 'utf8'); //process.argv[2] is the fi
 // \u1F00 == 7936
 // \u1FFF == 8191
 
-function checkGreek(str, x) {
+function isGreek(str, x) {
   if ((str.charCodeAt(x) >= 880 && str.charCodeAt(x) <= 1023) || (str.charCodeAt(x) >= 7936 && str.charCodeAt(x) <= 8191)) {
     return true;
   } else
@@ -19,7 +19,7 @@ function checkGreek(str, x) {
 var new_str = ''
 
 for (i = 0; i < file.length; i++) {
-  if (checkGreek(file, i)) {
+  if (isGreek(file, i)) {
     new_str += ("<span class=\"greekFont\">" + file[i] + "</span>");
   } else {
     new_str += file[i];

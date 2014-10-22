@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 
-// var str = fs.readFileSync(process.argv[2], 'utf8'); //process.argv[2] is the file input
+var str = fs.readFileSync(process.argv[2], 'utf8'); //process.argv[2] is the file input
 
 // Greek Unicode decimal values using the method charCodeAt()
 // \u0370 == 880
@@ -43,37 +43,32 @@ function isNext(str, loc) {
 }
 
 
-function writeGreek() {
+var openTag = '<span class=greekFont>';
+var closeTag = '</span>'
 
-}
+function main(inStr) {
 
+  var tmpStr = '';
 
-var start = 0;
-var end = 0;
+  for (var i = 0; i < inStr.length; i++) {
 
-var tmpStr = '';
+    if (isGreekChar(inStr[i])) {
+      tmpStr += openTag;
+      while (isNext(inStr, i)) {
+        tmpStr += inStr[i];
+        i++;
+      }
+      tmpStr += inStr[i];
+      if (!isNext(inStr, i)) { //if next and char is not gree add it to the str
+        tmpStr += closeTag;
+      }
 
-for (var i = 0; i < demoStr.length; i++) {
-
-  if (isGreekChar(demoStr[i])) {
-    tmpStr += demoStr[i];
-    if (!isNext(demoStr, i)) { //if next and char is not gree add it to the str
-      tmpStr += '</span>';
+    } else {
+      tmpStr += inStr[i]
     }
-
-    if (isNext(demoStr, i)) { //
-      // tmpStr += '***';
-    }
-
-  } else {
-    tmpStr += demoStr[i]
   }
+
+  return tmpStr;
 }
 
-console.log(demoStr, '\n\n');
-
-console.log(tmpStr);
-
-
-
-// // fs.writeFileSync(process.argv[3], new_str);
+fs.writeFileSync(process.argv[2]  += '.greekify', main(str));

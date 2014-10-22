@@ -34,11 +34,10 @@ function isGreekChar(str, loc) {
 Receives a string and a location and returns how many greek character are
 *****/
 function isNext(str, loc) {
-  var count = 1;
 
   if (isGreekChar(str, loc + 1)) { //this is true if the next char IS a greek char
-    // console.log('next char IS a greek char');
     // console.log(str[loc], loc);
+    // console.log(str[loc + 1]);
     return true;
   }
 
@@ -48,7 +47,6 @@ function isNext(str, loc) {
       // console.log(str[loc], loc);
       return true;
     }
-
     if (!isGreekChar(str, loc + 2)) {
       // console.log('next char is NOT a greek char AND next ISN\'T');
       // console.log(str[loc], loc);
@@ -68,25 +66,29 @@ function isNext(str, loc) {
   // }
 
 
-
 }
 
-var x = 0;
+var start = 0;
+var end = 0;
 
 for (var i = 0; i < demoStr.length; i++) {
+
+
+
+
   if (isGreekChar(demoStr[i])) {
-    var n = 0;
-    while (isNext(demoStr, i)) {
-      console.log(demoStr.substr(i, n));
-      n += 1;
+    // console.log(isNext(demoStr, i));
+    if (isNext(demoStr, i)) {
+      start = i;
+      end += 1;
+      // console.log(end);
     }
-
-
-    // x += 1;
-    // console.log(demoStr[i], x);
+    if (!isNext(demoStr, i)) {
+      console.log(demoStr.substr(start - end, end));
+      end = 0;
+    }
   }
 }
-
 
 
 // var new_str = ''

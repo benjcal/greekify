@@ -12,7 +12,7 @@ var fs = require('fs');
 // \u1FFF == 8191
 
 
-var demoStr = '\u0370\u0370\u0370';
+var demoStr = "There are three uses of the middle voice. The Reflexive Middle reflects the action on the subject—ὁ ἄνθρωπος νίπτεται - \"the man is washing himself.\" The Intensive Middle stresses the agent producing the action. It says this is the person and no other who is performing the action—ὁ κυρίος δοξάζεται τὴν ἐκκλησίαν - \"The Lord is glorifying the church.\" The point is that it is He and not other who is accomplishing the task. The Reciprocal Middle features the interchange of the action among plural subjects—αἱ προφήται διδάσκονται - \"The prophets are teaching each other.\"";
 
 
 
@@ -20,11 +20,11 @@ var demoStr = '\u0370\u0370\u0370';
 Receives a string and a location a returns true if the character
 in that location is a greek character.
 *****/
-function isGreekChar(str, x) {
-  if ((str.charCodeAt(x) >= 880 &&
-      str.charCodeAt(x) <= 1023) ||
-    (str.charCodeAt(x) >= 7936 &&
-      str.charCodeAt(x) <= 8191)) {
+function isGreekChar(str, loc) {
+  if ((str.charCodeAt(loc) >= 880 &&
+      str.charCodeAt(loc) <= 1023) ||
+    (str.charCodeAt(loc) >= 7936 &&
+      str.charCodeAt(loc) <= 8191)) {
     return true;
   } else
     return false;
@@ -33,25 +33,51 @@ function isGreekChar(str, x) {
 /*****
 Receives a string and a location and returns how many greek character are
 *****/
-function howLong(str, x) {
-  var n = 0;
+function howLong(str, loc) {
+  var count = 1;
 
-
-  while (flag) {
-    if (isGreekChar(str, x + 1)) {
-      n += 1;
-      x += 1;
-      continue;
-    }
-    flag = false
-    console.log('lol');
+  if (isGreekChar(str, loc + 1)) { //this is true if the next char IS a greek char
+    console.log('next char IS a greek char');
+    console.log(str[loc], loc);
   }
+
+  if (!isGreekChar(str, loc + 1)) { //this is true if the next char is NOT a greek char
+    if (isGreekChar(str, loc + 2)) {
+      console.log('next char is NOT a greek char BUT next IS');
+      console.log(str[loc], loc);
+    }
+
+    if (!isGreekChar(str, loc + 2)) {
+      console.log('next char is NOT a greek char AND next ISN\'T');
+      console.log(str[loc], loc);
+    }
+  }
+
+
+  // if (!isGreekChar(str, loc + 1) && isGreekChar(str, loc + 2)) { //this is true if the next char is NOT a greek char but the next after IS
+  //   console.log('next char is NOT a greek char but the next afte IS');
+  //   console.log(str[loc], loc);
+  // }
+
+  // if (!isGreekChar(str, loc + 1) && !isGreekChar(str, loc + 2)) { //this is true if the next char is NOT a greek char but the next after is NOT
+  //   console.log('next char is NOT a greek char but the next afte is NOT');
+  //   console.log(str[loc], loc);
+  // }
+
+
 
 }
 
-var flag = true;
 var x = 0;
-howLong(demoStr, x)
+
+for (var i = 0; i < demoStr.length; i++) {
+  if (isGreekChar(demoStr[i])) {
+    howLong(demoStr, i);
+
+    // x += 1;
+    // console.log(demoStr[i], x);
+  }
+}
 
 
 

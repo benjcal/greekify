@@ -12,7 +12,7 @@ var fs = require('fs');
 // \u1FFF == 8191
 
 
-var demoStr = "There are three uses of the middle voice. The Reflexive Middle reflects the action on the subject—ὁ ἄνθρωπος νίπτεται - \"the man is washing himself.\" The Intensive Middle stresses the agent producing the action. It says this is the person and no other who is performing the action—ὁ κυρίος δοξάζεται τὴν ἐκκλησίαν - \"The Lord is glorifying the church.\" The point is that it is He and not other who is accomplishing the task. The Reciprocal Middle features the interchange of the action among plural subjects—αἱ προφήται διδάσκονται - \"The prophets are teaching each other.\"";
+var demoStr = "There are three uses of the middle voice. The Reflexive Middle reflects the action \non the subject—ὁ ἄνθρωπος νίπτεται - \"the man is washing himself.\" The Intensive Middle stresses \nthe agent producing the action. It says this is the person and no other who is performing the \naction—ὁ κυρίος δοξάζεται τὴν ἐκκλησίαν - \"The Lord is glorifying the church.\" The point is that \nit is He and not other who is accomplishing the task. The Reciprocal Middle features the \ninterchange of the action among plural subjects—αἱ προφήται διδάσκονται - \"The prophets are \nteaching each other.\"";
 
 
 
@@ -75,7 +75,6 @@ for (var i = 0; i < demoStr.length; i++) {
 
 
 
-
   if (isGreekChar(demoStr[i])) {
     // console.log(isNext(demoStr, i));
     if (isNext(demoStr, i)) {
@@ -89,6 +88,8 @@ for (var i = 0; i < demoStr.length; i++) {
     }
   }
 }
+
+console.log(demoStr);
 
 
 // var new_str = ''
